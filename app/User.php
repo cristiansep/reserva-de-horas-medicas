@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'pivot'
     ];
 
     /**
@@ -41,7 +41,7 @@ class User extends Authenticatable
     public function specialties() {
 
 
-        return $this->belongsToMany(Specialty::class);
+        return $this->belongsToMany(Specialty::class)->withTimestamps();
     }
 
 

@@ -26,10 +26,11 @@
             <form action=" {{ url('patients') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Especialidad</label>
-                    <select name="" id="" class="form-control">
+                    <label for="specialty">Especialidad</label>
+                    <select name="specialty_id" id="specialty" class="form-control" required>
+                        <option value="">Seleccionar especialdidad</option>
                         @foreach ($specialties as $specialty)
-                              <option value="{{ $specialty }}">{{ $specialty->name }}</option>
+                              <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
                         @endforeach
                       
                     </select>
@@ -37,35 +38,43 @@
     
                 <div class="form-group">
                     <label for="email">Médico</label>
-                    <select name="" id="" class="form-control">
+                    <select name="doctor_id" id="doctor" class="form-control">
                         <option value=""></option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="rut">Fecha</label>
+                    <label for="date">Fecha</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                         </div>
-                        <input class="form-control datepicker" placeholder="Seleccionar fecha" type="text" value="">
+                        <input class="form-control datepicker" placeholder="Seleccionar fecha" 
+                        id="date"
+                        type="text" value="{{date('Y-m-d')}}" 
+                        data-date-format="yyyy-mm-dd" 
+                        data-date-start-date="{{date('Y-m-d')}}"
+                        data-date-end-date="+30d"
+                        >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="addres">Hora de atención</label>
-                    <input type="text" name="addres" id="addres" class="form-control "  value="{{ old('addres') }}">
+                   <div id="hours">
+                       
+                   </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Telefono / Movil</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}">
+                    <label for="type">Tipo de consulta</label>
+                    <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}">
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label for="password">Contraseña</label>
                   <input type="text" name="password" id="password" class="form-control" value="{{ Str::random(6) }}">
-                </div>
+                </div> --}}
                 
                     <button type="submit" class="btn btn-primary">Guardar</button>
                
@@ -77,4 +86,6 @@
 
 @section('scripts')
 <script src="{{ asset('/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
+<script src="{{ asset('/js/appointment/create.js') }}"></script>
 @endsection
