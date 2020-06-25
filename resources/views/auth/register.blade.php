@@ -50,6 +50,15 @@
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Correo electronico">
                 </div>
               </div>
+
+              <div class="form-group">
+                <div class="input-group input-group-alternative mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-badge"></i></span>
+                  </div>
+                  <input id="rut" type="text" class="form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') }}" required autocomplete="name" autofocus placeholder="Ingrese su cedula de identidad">
+                </div>
+              </div>
               <div class="form-group">
                 <div class="input-group input-group-alternative">
                   <div class="input-group-prepend">

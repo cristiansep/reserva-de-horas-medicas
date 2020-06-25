@@ -19,23 +19,35 @@ class Appointment extends Model
 
     ];
 
+    // Relacion N a 1
     public function specialty() {
 
         return $this->belongsTo(Specialty::class);
 
     }
 
+    // Relacion N a 1
     public function doctor() {
 
         return $this->belongsTo(User::class);
 
     }
 
+    // Relacion N a 1
     public function patient() {
 
         return $this->belongsTo(User::class);
 
     }
+
+        // Relacion 1 a 1
+    public function cancellation() {
+
+        return $this->hasOne(CancelledAppointment::class);
+
+    }
+
+
 
     public function getScheduleTimeNewAttribute() {
         return (new Carbon($this->schedule_time))->format('H:i');

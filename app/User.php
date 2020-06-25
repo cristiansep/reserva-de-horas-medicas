@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','rut','address','phone','role',
+        'name', 'email', 'password','rut','address','phone','role','avatar',
     ];
 
     /**
@@ -53,5 +53,30 @@ class User extends Authenticatable
     public function scopeDoctors($query){
 
         return $query->where('role', 'doctor');
+    }
+
+    public function asDoctorAppointments() {
+
+        return $this->hasMany(Appointment::class, 'doctor_id');
+
+    }
+
+
+    public function attendedAppointments() {
+
+        return $this->asDoctorAppointments()->where('status', 'Atendida');
+
+    }
+
+    public function cancelledAppointments() {
+
+        return $this->asDoctorAppointments()->where('status', 'Cancelada');
+
+    }
+
+    public function asPatientAppointments() {
+
+        return $this->hasMany(Appointment::class, 'patient_id');
+
     }
 }
